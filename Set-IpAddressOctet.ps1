@@ -1,15 +1,20 @@
 
-function Set-IpAddressOctet4 {
+
+function Set-IpAddressOctet {
     param (
         [string]$ip,
-     
+
         [ValidateRange(0,255)]
-        [int]$newoctet
+        [int]$newOctet,
+
+        [ValidateRange(0,3)]
+        [int]$octetId = 3
     )
      $ip = ($ip -split '/')[0]
      $octets = $ip -split "\."
-     $octets[3] = $newoctet.ToString()
+     $octets[$octetId] = $newOctet.ToString()
      
      $newaddress = $octets -join "."
      $newaddress
 }
+
